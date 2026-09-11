@@ -5,6 +5,7 @@ function App() {
   return (
     <> 
     <Navbar></Navbar>
+    <h2 className='text-6xl text-amber-950 text-center'>hello</h2>
     </>
   )
 }
