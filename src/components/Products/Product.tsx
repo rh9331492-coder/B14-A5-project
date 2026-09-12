@@ -1,75 +1,71 @@
-import { useState } from 'react'
 import type { Type } from '../../types/Types'
+import { FaStar } from "react-icons/fa";
 
 interface ProductType {
     product: Type
+    handleAddToStack: (product: Type) => void
+    selectedProducts: Type[]
 }
 
-const Product = ({ product }: ProductType) => {
-    const [selected, setSelected] = useState(false)
+const Product = ({
+    product,
+    handleAddToStack,
+    selectedProducts
+}: ProductType) => {
 
-    const HendleButton = () => {
-        setSelected(true)
-    }
-
-    console.log(product)
+    const isSelected = selectedProducts.some(
+        (item) => item.id === product.id
+    )
 
     return (
-        <div className="group w-full max-w-sm overflow-hidden rounded-2xl border border-base-300 bg-base-100 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+        <div className="w-full rounded-[28px] border border-gray-100 bg-white p-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
 
-            <figure className="relative overflow-hidden">
+            <div className="flex items-start justify-between">
                 <img
-                    src={product.level}
+                    src={product.image}
                     alt={product.name}
-                    className="h-64 w-full object-cover transition duration-500 group-hover:scale-110"
+                    className="w-7 h-14 object-contain"
                 />
 
-                <div className="absolute left-4 top-4">
-                    <span className="badge badge-primary px-3 py-3 font-semibold">
-                        NEW
-                    </span>
-                </div>
-
-                <button className="btn btn-circle btn-sm absolute right-4 top-4 bg-base-100/90 backdrop-blur hover:bg-base-100">
-                    ♡
-                </button>
-            </figure>
-
-            <div className="card-body gap-3">
-
-                <span className="text-sm font-medium text-primary">
-                    {product.category}
+                <span className="rounded-full border border-blue-100 bg-blue-50 px-5 py-2 text-sky-500">
+                    {product.badge}
                 </span>
+            </div>
 
-                <h2 className="text-2xl font-bold tracking-tight">
+            <div>
+                <h2 className="text-3xl font-bold text-slate-900">
                     {product.name}
                 </h2>
 
-                <p className="line-clamp-2 text-sm leading-6 text-base-content/60">
+                <p className="mt-4 leading-9 text-slate-400">
                     {product.description}
                 </p>
-
-                <div className="flex flex-wrap justify-between gap-2">
-                    <span className="badge badge-outline">
-                        Frontend
-                    </span>
-                    <span className="badge badge-outline">
-                        Beginner-Friendly
-                    </span>
-
-                    <div className="flex items-center gap-1 text-sm">
-                        ⭐ <span>4.8</span>
-                    </div>
-                </div>
-
-                <button
-                    onClick={HendleButton}
-                    className="btn btn-primary rounded-xl px-6"
-                    disabled={selected}
-                >
-                    {selected ? 'Selected' : 'Add to Cart'}
-                </button>
             </div>
+
+            <div className="my-6 h-px bg-gray-100"></div>
+
+            <div className="flex items-center justify-between">
+                <span className="rounded-md px-4 py-2 text-slate-500">
+                    {product.category}
+                </span>
+
+                <span className="text-base text-slate-500">
+                    {product.level}
+                </span>
+
+                <div className="flex items-center gap-2 text-base text-slate-600">
+                    <FaStar className="text-yellow-400" />
+                    <span>{product.rating}</span>
+                </div>
+            </div>
+
+            <button
+                onClick={() => handleAddToStack(product)}
+                disabled={isSelected}
+                className="w-full btn btn-primary text-white text-sm font-semibold py-2.5 px-4 rounded-xl cursor-pointer my-5 disabled:cursor-not-allowed"
+            >
+                {isSelected ? "Added to Stack" : "Add to Stack"}
+            </button>
 
         </div>
     )

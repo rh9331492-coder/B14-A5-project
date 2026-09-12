@@ -6,5 +6,6 @@ export interface Type {
     category: string,
     level: string,
     rating: number,
-    icon: string
+    icon?: string,
+    image:string
 }
