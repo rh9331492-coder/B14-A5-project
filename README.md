@@ -8,7 +8,7 @@ DevStack is a modern web application that helps users explore different web deve
 
 ##  GitHub Repository
 
-[GitHub Repository](https://github.com/rh9331492-coder/B14-A5-project)
+[GitHub Repository](https://github.com/rh9331492-coder/B14-A5-project.git)
 
 ---
 
